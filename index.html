@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>TypeScript</title>
+    <link rel="shortcut icon" href="image/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="dist/reset.css" />
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="dist/theme/black.css" id="theme" />
+
+    <!-- Theme used for syntax highlighted code -->
+    <link
+      rel="stylesheet"
+      href="plugin/highlight/monokai.css"
+      id="highlight-theme"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <div><img src="image/start.jpg" alt="ts" /></div>
+        </section>
+        <section>
+          <p>What is TypeScript ?</p>
+          <p class="started">
+            TypeScript is a strongly typed, object oriented, compiled language.
+            TypeScript is a typed superset of JavaScript compiled to
+            JavaScript. In other words, TypeScript is JavaScript plus some
+            additional features.
+            It was designed by Anders Hejlsberg (designer of C#) at Microsoft in
+            2012. And from the very beginning, the new language
+            began to spread rapidly due to its flexibility and productivity.
+          </p>
+          <div>
+            <img src="image/0ufu1q21.js-ts.jpg" alt="ts" width="350" height="300"/>
+          </div>
+        </section>
+        <section>
+          <p>Why use TypeScript ?</p>
+          <ul>
+            <li>Static typing</li>
+            <li>Better IDE support</li>
+            <li>Makes code easier to read, debug and understand.</li>
+          </ul>
+        </section>
+        <section>
+          <p>TypeScript Setup:</p>
+          <p class="fs30">
+            We just need to install it with the npm package manager and create a
+            new typescript file
+          </p>
+          <pre><code data-trim data-noescape>
+				npm install -g typescript
+				</code></pre>
+        </section>
+        <section>
+			  <p>Number:</p>
+			  <p class="fs30"> Number type including binary and hex values</p>
+          	<pre><code data-trim data-noescape>
+				let number: number = 5;
+				let hex: number = 0xbeef;
+				let bin: number = 0b0010;
+			</code></pre>
+		</section>
+		<section>
+			<p>String:</p>
+			<pre><code data-trim data-noescape>
+				let str: string = "Hello World!";
+		  </code></pre>
+		  <p>Boolean:</p>
+		  <pre><code data-trim data-noescape>
+			let falsy: boolean = false;
+			let truthy: boolean = true;
+	  </code></pre>
+    </section>
+    <section>
+			<p>Single Type:</p>
+			<pre><code data-trim data-noescape>
+				let str: string = "Hello World!";
+		  </code></pre>
+		  <p>Multiple Types:</p>
+		  <pre><code data-trim data-noescape>
+        let multitype: string | number = "Hello World!";
+        multitype = 20;
+	  </code></pre>
+    </section>
+    <section>
+			<p>Any:</p>
+			<pre><code data-trim data-noescape>
+        let notSure: any = 4;
+        notSure = "Hello";
+      </code></pre>
+      <p>Type assertions</p>
+      <pre><code data-trim data-noescape>
+        as
+        let str: any = "Hello";
+        let strLength = (str as string).length;
+      </code></pre>
+      <pre><code data-trim data-noescape>
+        &lt;&gt;
+        let str: any = "Hello";
+        let strLength = (&lt;string&gt;str).length;
+      </code></pre>
+    </section>
+    <section>
+			<p>Arrays:</p>
+			<pre><code data-trim data-noescape>
+        let array: string[] = ["Hello", "World"];
+        let genericArray: Array&lt;number&gt; = [1, 2, 3];
+        let multitypeArray: (string | number)[] = ["Hello", 1];
+        let multidimensionalArray: number[][] = [[1,2], [3,4]];
+      </code></pre>
+      <p>Tuple:</p>
+      <pre><code data-trim data-noescape>
+        let tuple: [number, string] = [20, "Hello"];
+      </code></pre>
+    </section>
+    <section>
+      <p>Enums:</p>
+      <p class="fs30">Enums allow us to define a set of named constants.
+      Typescript also provides both numeric and string-based enums.</p>
+			<pre><code data-trim data-noescape>
+      enum Color {Red,Green,Blue,}
+      let c: Color = Color.Green; // 1
+		  </code></pre>
+		  <pre><code data-trim data-noescape>
+        enum Color {
+          Red = 1,
+          Green,
+          Blue,
+          }
+        let colorName: string = Color[2]; // Green
+	    </code></pre>
+    </section>
+    <section>
+      <p>Void:</p>
+      <p class="fs30">Void is a little like the opposite of any: the absence of having any type at all.
+        You may commonly see this as the return type of functions that do not return a value:</p>
+			<pre><code data-trim data-noescape>
+        function warn(): void {
+          console.log("Warning message");
+        }
+      </code></pre>
+      <p>Never:</p>
+      <p class="fs30">The never type represents the type of values that never occur:</p>
+      <pre><code data-trim data-noescape>
+        // Function returning never must not have a reachable end point
+        function error(message: string): never {
+          throw new Error(message);
+        }
+      </code></pre>
+    </section>
+    <section>
+      <p>Custom types:</p>
+      <pre><code data-trim data-noescape>
+        type Human = {firstName: string, age: number, height: number}
+        const human: Human = {firstName: "Pete", age: 32, height: 185}
+      </code></pre>
+    </section>
+    <section>
+      <section>
+        <h4>Functions:</h4>
+        <p>Parameters and return types:</p>
+			  <pre><code data-trim data-noescape>
+          function add(num1: number, num2: number): number {
+            return num1 + num2
+          }
+
+          add(2, 5);
+          add(1); //Error to few parameters
+          add(5, "2"); //Error the second argument must be a number
+        </code></pre>
+      </section>
+      <section>
+          <p>Optional properties:</p>
+          <pre><code data-trim data-noescape>
+          function printName(firstName: string, lastName?: string) {
+            ...
+          }
+
+          printName("Gabriel", "Tanner"); // works correctly
+          printName("Gabriel"); // works correctly
+        </code></pre>
+      </section>
+      <section>
+        <p>Default values:</p>
+        <pre><code data-trim data-noescape>
+          function buildName(firstName: string, lastName = "Smith") {
+            return firstName + " " + lastName;
+          }
+
+          let result1 = buildName("Bob"); // returns "Bob Smith"
+      </code></pre>
+    </section>
+    </section>
+    <section>
+      <section>
+        <h4>Classes:<h4>
+          <pre><code data-trim data-noescape>
+            class Greeter {
+              greeting: string;
+
+              constructor(message: string) {
+                this.greeting = message;
+              }
+
+              greet() {
+                return "Hello, " + this.greeting;
+              }
+            }
+
+            let greeter = new Greeter("world");
+          </code></pre>
+      </section>
+      <section>
+        <p>Inheritance:</p>
+        <pre><code data-trim data-noescape>
+          class Animal {
+            move(distanceInMeters: number = 0) {
+              console.log(`Animal moved ${distanceInMeters}m.`);
+            }
+          }
+          class Dog extends Animal {
+            bark() {
+              console.log("Woof! Woof!");
+            }
+          }
+
+          const dog = new Dog();
+          dog.bark(); // "Woof! Woof!"
+          dog.move(10); // "Animal moved 10m."
+        </code></pre>
+      </section>
+      <section>
+        <p>Access modifiers:</p>
+        <pre><code data-trim data-noescape>
+          Public by default
+
+          class Animal {
+            public name: string;
+
+            public constructor(theName: string) {
+              this.name = theName;
+            }
+
+            public move(distanceInMeters: number) {
+              console.log(`${this.name} moved ${distanceInMeters}m.`);
+            }
+          }
+        </code></pre>
+      </section>
+      <section>
+        <pre><code data-trim data-noescape>
+          Private
+
+          class Animal {
+            private name: string;
+
+            constructor(theName: string) {
+              this.name = theName;
+            }
+          }
+
+          new Animal("Cat").name;
+
+          // Property 'name' is private
+        </code></pre>
+      </section>
+      <section>
+        <pre><code data-trim data-noescape>
+          Protected
+
+          class Person {
+            protected name: string;
+            constructor(name: string) {
+              this.name = name;
+            }
+          }
+
+          class Employee extends Person {
+            private department: string;
+
+            constructor(name: string, department: string) {
+              super(name);
+              this.department = department;
+            }
+
+            public getElevatorPitch() {
+              return `Hello, my name is ${this.name}
+              and I work in ${this.department}.`;
+            }
+          }
+
+          let howard = new Employee("Howard", "Sales");
+          console.log(howard.getElevatorPitch());
+          // "Hello, my name is Howard and I work in Sales."
+          console.log(howard.name);
+          // Error
+        </code></pre>
+      </section>
+      <section>
+        <pre><code data-trim data-noescape>
+          Readonly
+
+          class Octopus {
+            readonly name: string;
+            readonly numberOfLegs: number = 8;
+
+            constructor(theName: string) {
+              this.name = theName;
+            }
+          }
+
+          let dad = new Octopus("Man with the 8 strong legs");
+          dad.name = "Man with the 3-piece suit";
+          // Cannot assign to 'name' because it is a read-only property.
+        </code></pre>
+      </section>
+    </section>
+    <section>
+      <p>Interfaces:</p>
+			<pre><code data-trim data-noescape>
+        interface Person{
+          name: string
+        }
+         const person: Person = {name: "Gabriel"}
+         // ok
+         const person2: Person = {names: "Gabriel"}
+         // is not assignable to type Person
+      </code></pre>
+    </section>
+    <section>
+      <p>Conclusion</p>
+      <p class="fs30">TypeScript has been increasing in its popularity for the last couple of years.
+        It’s mentioned among the five most promising languages in 2020. Angular, one of
+        the largest frontend frameworks, is using TypeScript. About 60% of JS programmers
+        already use TypeScript, and 22% wish to try.</p>
+    </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+      });
+    </script>
+  </body>
+</html>
